@@ -280,9 +280,18 @@ end:
 ## Questions
 
 1. What flags are affected by the `cmp` instruction?
-2. How does `cmp` differ from `sub` in behavior?
-3. Why must jump labels be local (and defined before use)?
-4. What would happen if you used `jmp` to jump into the middle of a syscall?
+   ZF, SF, CF, OF.
+   ZF = 1 if a - b = 0
+   SF = 1 if a - b = < 0 
+   CF = 1 if a - b = -c
+   OF = 1 if a - b = > -129
+3. How does `cmp` differ from `sub` in behavior?
+   cmp compare just to set a flag, sub stores actuall value.
+5. Why must jump labels be local (and defined before use)?
+   Assembler goes 2 times over the code. In first time Assembly collecting Label adress to calculate Offsets.
+   its the reason why we need to define labels before we can use them.
+7. What would happen if you used `jmp` to jump into the middle of a syscall?
+   syscall ist the place where we hand over our command to kernel, our command is sequence of bit, if we jump in the middle of the bits and start to try to interpret them as command our kernel will crash the programm because its undefined instruction. 
 
 ## Advice
 
